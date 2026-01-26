@@ -30,7 +30,7 @@ apt update -y && apt install curl -y
 
 ```
 # 安装别名
-bash <(curl -fsSL "https://raw.githubusercontent.com/a62516495a/tcp/refs/heads/master/net-tcp-tune.sh?$(date +%s)")
+bash <(curl -fsSL "https://raw.githubusercontent.com/a62516495a/tcp/refs/heads/master/install_alias.sh?$(date +%s)")
 
 # 重新加载配置
 source ~/.bashrc  # 或 source ~/.zshrc
