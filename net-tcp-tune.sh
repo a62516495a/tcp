@@ -294,6 +294,14 @@ run_remote_script() {
     local interpreter=${2:-bash}
     shift 2
 
+    # 兼容常见的管道执行写法: curl ... | bash -s install
+    # 当前函数会先下载为临时文件再执行，-s 在这种模式下不再是 bash 选项，
+    # 否则会被远程脚本误认为第一个业务参数。
+    if [ "${1:-}" = "-s" ]; then
+        shift
+        [ "${1:-}" = "--" ] && shift
+    fi
+
     local tmp_file
     tmp_file=$(mktemp /tmp/net-tcp-tune.XXXXXX) || {
         echo -e "${gl_hong}❌ 无法创建临时文件${gl_bai}"
